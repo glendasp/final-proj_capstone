@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'yourgmail@gmail.com'
+EMAIL_HOST_PASSWORD = 'yourpassword'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 # Application definition
 
@@ -37,7 +42,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'crispy_forms',
+    'registration',  # should be immediately above 'django.contrib.auth'
     'myapp',
+    'questionsapp',
 
 )
 
@@ -102,3 +111,25 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_in_env", "static_root")
+# STATIC_ROOT = os.path.join(BASE_DIR, "static_in_pro", "static_root")
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "myapp/static_in_pro", "our_static"),
+)
+
+
+# MEDIA_URL allow user to change their profile picture
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_in_env", "media_root")
+
+
+# crispy stuff
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# django-registration-redux stuff
+ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window; you may, of course, use a different value.
+REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
