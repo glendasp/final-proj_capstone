@@ -5,6 +5,8 @@ from django.conf import settings
 from mysite.questionsapp.models import Question
 from .models import SignUp
 from .forms import ContactForm, SignUpForm
+
+
 # from questionsapp.models import Question
 
 
@@ -44,8 +46,8 @@ def home(request):
     https://docs.djangoproject.com/en/1.10/ref/models/querysets/
     '''
 
-    if request.user.is_authenticated(): # and request.user.is_staff:
-        queryset = Question.objects.all() # .filter(full_name__iexact="Glendex")
+    if request.user.is_authenticated():  # and request.user.is_staff:
+        queryset = Question.objects.all()  # .filter(full_name__iexact="Glendex")
         # print(SignUp.objects.all().order_by('-timestamp').filter(full_name__iexact="Justin").count())
         context = {
             "queryset": queryset
@@ -53,9 +55,6 @@ def home(request):
         return render(request, "questions/quiz.html", context)
 
     return render(request, "quiz.html", context)
-
-
-
 
 
 # For contact form
