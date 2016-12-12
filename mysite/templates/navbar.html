@@ -18,30 +18,22 @@
           <li><a href="{% url 'contact' %}">Contact</a></li>
 
 
-        <!------------------------------------------------------>
-        <!--{% if request.user.is_authenticated %}-->
-        <!--<li><a href="{% url 'profile_user' %}">Profile</a></li>-->
-          <!--<li><a href="/">Logout</a></li>-->
-          <!--{% else %}-->
-          <!--<li><a href="/">Register</a></li>-->
-          <!--{% endif %}-->
-        <!--</ul>-->
 
-        <!--
-        Login form session
-        If user is logged in: show logout option
-        Will show online if user is not authenticated
+        <!--Login form session-->
+        <!--If user is logged in: show logout option-->
+        <!--Will show online if user is not authenticated-->
 
-         -->
+
       <ul class="nav navbar-nav navbar-right">
 
-        {% if request.user.is_authenticated %}
-        <li><a href="{% url 'profile_user' %}">Profile</a></li>
-          <li><a href="{% url 'auth_logout' %}">Logout</a></li>
-          {% else %}
-          <li><a href="{% url 'registration_register' %}">Register</a></li>
-          {% endif %}
-        </ul>
+         <ul class="nav navbar-nav navbar-right">
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'registration_register' %}">Register</a></li>
+            {% endif %}
+          </ul>
+
 
         {% if not request.user.is_authenticated and not "/accounts/login" in request.get_full_path %}
           <form class='navbar-form navbar-right' method='POST' action='{% url "auth_login" %}'>{% csrf_token %}
