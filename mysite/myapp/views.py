@@ -48,13 +48,13 @@ def home(request):
 
     if request.user.is_authenticated():  # and request.user.is_staff:
         queryset = Question.objects.all()  # .filter(full_name__iexact="Glendex")
-        # print(SignUp.objects.all().order_by('-timestamp').filter(full_name__iexact="Justin").count())
+        # print(SignUp.objects.all().order_by('-timestamp').filter(full_name__iexact="Julian").count())
         context = {
             "queryset": queryset
         }
-        return render(request, "questions/quiz.html", context)
+        return render(request, "questions/home.html", context)
 
-    return render(request, "quiz.html", context)
+    return render(request, "home.html", context)
 
 
 # For contact form
