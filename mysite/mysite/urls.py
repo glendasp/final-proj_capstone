@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
     # Sets up url for questions
     url(r'^question/(?P<id>\d+)/$', 'questionsapp.views.quiz', name='question_quiz'),
+    url(r'^question/$', 'questionsapp.views.home', name='question_home'),
 ]
 # Taking the URLs, appending and serving
 
