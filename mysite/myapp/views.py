@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.mail import send_mail
 from django.conf import settings
 
-from mysite.questionsapp.models import Question
+from questionsapp.models import Question
 from .models import SignUp
 from .forms import ContactForm, SignUpForm
 

@@ -1,5 +1,5 @@
 <div class='{% if center_text %}text-center{% endif %}'>
-<form method='POST' action='{% url "question_single" id=instance.id %}'> {% csrf_token %}
+<form method='POST' action='{% url "question_quiz" id=instance.id %}'> {% csrf_token %}
 {{ form.errors }}
 {% if title_size %}
 <h2>{{ title_size }}>{{ instance.text }}</h2>{{ title_size }}>
