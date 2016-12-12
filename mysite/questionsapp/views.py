@@ -100,6 +100,6 @@ def home(request):
             "instance": instance,
             # "queryset": queryset
         }
-        return render(request, "questions/quiz.html", context)
+        return render(request, "questions/home.html", context)
     else:
         raise Http404
