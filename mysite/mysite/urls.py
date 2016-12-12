@@ -14,7 +14,7 @@ urlpatterns = [
     # sets up URL patterns for the views in django-registration-redux,
     url(r'^accounts/', include('registration.backends.default.urls')),
     # Sets up url for questions
-    url(r'^question/$', 'questions.views.home', name='question_home'),
+    url(r'^question/(?P<id>\d+)/$', 'questions.views.quiz', name='question_quiz'),
 ]
 # Taking the URLs, appending and serving
 
