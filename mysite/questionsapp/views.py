@@ -1,76 +1,36 @@
-from django.shortcuts import render, redirect, get_object_or_404
+# from matches.signals import user_matches_update
 from django.http import Http404
+from django.shortcuts import render, redirect, get_object_or_404
+
+from .forms import UserResponseForm
+from .models import Question, Answer, UserAnswer
+
+
 # Create your views here.
-from .models import Question, Answer, IdealAnswer
-from .forms import UsersAnsform
 
-
-def home(request):
+def quiz(request, id):
     if request.user.is_authenticated():
-        form = UsersAnsform(request.POST or None)
-        # check if it is valid if so get response from the form
-        if form.is_valid():
-            print(form.cleaned_data)
-            # getting the questions and answers
-            question_id = form.cleaned_data.get('question_id')  # form.cleaned_data['question_id']
-            answer_id = form.cleaned_data.get('answer_id')
-            question_instance = Question.objects.get(id=question_id)
-            answer_instance = Answer.objects.get(id=answer_id)
-            print(answer_instance.text, question_instance.text)
 
-            question_id = form.cleaned_data['question_id']
-        queryset = Question.objects.all().order_by('-date_created')
-        print(queryset)  # for debugging
-        instance = queryset[0]
-        print(instance)  # for debugging
-        context = {
-            "form": form,
-            "instance": instance,
-            # "queryset": queryset
-
-        }
-        return render(request, "questions/home.html", context)
-    else:
-        raise Http404
-
-
-# Adicionando id
-# id esta relacionado com a intance que vou precisar trabalhar depois
-def Quiz(request, id):
-    print(id)
-    # Se não encontrar pergunta mostra pag de erro
-    # try:
-    #     instance = Question.object.get(id=id)
-    # except:
-    #     raise Http404
-    # instance = Question.object.get(id=id)
-
-    if request.user.is_authenticated():
-        queryset = Question.objects.all().order_by('-date_created')
-        print(queryset)  # for debugging
+        queryset = Question.objects.all().order_by('-timestamp')
         instance = get_object_or_404(Question, id=id)
-        print(instance)  # for debugging
-        form = UsersAnsform(request.POST or None)
 
         try:
-            user_answer = IdealAnswer.objects.get(user=request.user, question=instance)
+            user_answer = UserAnswer.objects.get(user=request.user, question=instance)
             updated_q = True
-        except IdealAnswer.DoesNotExist:
-            user_answer = IdealAnswer()
+        except UserAnswer.DoesNotExist:
+            user_answer = UserAnswer()
             updated_q = False
-        except IdealAnswer.MultipleObjectsReturned:
-            user_answer = IdealAnswer.objects.filter(user=request.user, question=instance)[0]
+        except UserAnswer.MultipleObjectsReturned:
+            user_answer = UserAnswer.objects.filter(user=request.user, question=instance)[0]
             updated_q = True
         except:
-            user_answer = IdealAnswer()
+            user_answer = UserAnswer()
             updated_q = False
 
-        form = UsersAnsform(request.POST or None)
-
-        # check if it is valid if so get response from the form
+        form = UserResponseForm(request.POST or None)
         if form.is_valid():
             print(form.cleaned_data)
-            # getting the questions and answers
+            # print request.POST
 
             question_id = form.cleaned_data.get('question_id')  # form.cleaned_data['question_id']
 
@@ -83,14 +43,10 @@ def Quiz(request, id):
             question_instance = Question.objects.get(id=question_id)
             answer_instance = Answer.objects.get(id=answer_id)
 
-            # creating instance
             user_answer.user = request.user
             user_answer.question = question_instance
             user_answer.my_answer = answer_instance
             user_answer.my_answer_importance = importance_level
-
-            # question_id = form.cleaned_data['question_id']
-
             if their_answer_id != -1:
                 their_answer_istance = Answer.objects.get(id=their_answer_id)
                 user_answer.their_answer = their_answer_istance
@@ -116,19 +72,34 @@ def Quiz(request, id):
             else:
                 return redirect("home")
 
-        # queryset = Question.objects.all().order_by('-date_created')
-        #     print(queryset)  # for debugging
-        #     instance = Question.object.get(id=id)
-        #     print(instance)  # for debugging
         context = {
             "form": form,
             "instance": instance,
             "user_answer": user_answer,
             # "queryset": queryset
         }
-
-
         return render(request, "questions/quiz.html", context)
     else:
         raise Http404
 
+
+def home(request):
+    if request.user.is_authenticated():
+        form = UserResponseForm(request.POST or None)
+        if form.is_valid():
+            question_id = form.cleaned_data.get('question_id')  # form.cleaned_data['question_id']
+            answer_id = form.cleaned_data.get('answer_id')
+            question_instance = Question.objects.get(id=question_id)
+            answer_instance = Answer.objects.get(id=answer_id)
+            print(answer_instance.text, question_instance.text)
+
+        queryset = Question.objects.all().order_by('-timestamp')
+        instance = queryset[1]
+        context = {
+            "form": form,
+            "instance": instance,
+            # "queryset": queryset
+        }
+        return render(request, "questions/quiz.html", context)
+    else:
+        raise Http404

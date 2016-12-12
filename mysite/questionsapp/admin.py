@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Question, Answer, IdealAnswer
+from .models import Question, Answer, UserAnswer
 
 
 # Register your models here.
@@ -23,4 +23,4 @@ class QuestionAdm(admin.ModelAdmin):
 
 # admin.site.register(Question, QuestionAdm)
 admin.site.register(Answer)
-admin.site.register(IdealAnswer)
+admin.site.register(UserAnswer)
