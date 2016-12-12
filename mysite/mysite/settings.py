@@ -98,7 +98,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'US/Central'
 
 USE_I18N = True
 
@@ -128,7 +128,7 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_in_env", "media_roo
 # crispy stuff
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-# django-registration-redux stuff
+# django-registration-redux templates stuff
 ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window; you may, of course, use a different value.
 REGISTRATION_AUTO_LOGIN = True  # Automatically log the user in.
 SITE_ID = 1
