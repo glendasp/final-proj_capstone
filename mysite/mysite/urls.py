@@ -16,6 +16,11 @@ urlpatterns = [
     # Sets up url for questions
     url(r'^question/(?P<id>\d+)/$', 'questionsapp.views.quiz', name='question_quiz'),
     url(r'^question/$', 'questionsapp.views.home', name='question_home'),
+    # Commenting this since I couldn't get it to work on time
+    # url(r'^profile/edit/$', 'profiles.views.profile_edit', name='profile_edit'),
+    # url(r'^profile/(?P<username>[\w.@+-]+)/$', 'profiles.views.profile_view', name='profile'),
+    #
+    # url(r'^profile/$', 'profiles.views.profile_user', name='profile_user'),
 ]
 # Taking the URLs, appending and serving
 

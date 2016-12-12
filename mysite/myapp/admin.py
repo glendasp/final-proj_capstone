@@ -5,11 +5,11 @@ from .models import SignUp
 # Register your models here.
 class SignUpAdmin(admin.ModelAdmin):
     # Customizing how adm works: displaying what I want to see
-    # list_display = ["__str__", "date_created", "updated"]
-    # form = SignUpForm
-    class Meta:
-        list_display = ["__unicode__", "date_created", "updated"]
-        model = SignUp
+    list_display = ["__str__", "timestamp", "updated"]
+    form = SignUpForm
+    # class Meta:
+    #     list_display = ["__unicode__", "date_created", "updated"]
+    #     model = SignUp
 
 
 admin.site.register(SignUp, SignUpAdmin)

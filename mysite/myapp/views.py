@@ -1,4 +1,5 @@
 from django.shortcuts import render
+
 from django.core.mail import send_mail
 from django.conf import settings
 
@@ -52,7 +53,7 @@ def home(request):
         context = {
             "queryset": queryset
         }
-        return render(request, "questions/home.html", context)
+        return render(request, "questions/quiz.html", context)
 
     return render(request, "home.html", context)
 

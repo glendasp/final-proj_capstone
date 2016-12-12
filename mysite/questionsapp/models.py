@@ -84,3 +84,4 @@ def update_user_answer_score(sender, instance, *args, **kwargs):
 
     # pre_save.connect(update_user_answer_score, sender=UserAnswer)
 
+# https://docs.djangoproject.com/en/1.10/topics/signals/
