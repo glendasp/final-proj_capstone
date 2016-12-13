@@ -24,7 +24,7 @@ def home(request):
             full_name = "New full name"
         instance.full_name = full_name
         # if not instance.full_name:
-        # 	instance.full_name = "Justin"
+        # 	instance.full_name = "Julian"
         instance.save()
         context = {
             "title": "Thank you"
