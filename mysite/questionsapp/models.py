@@ -59,7 +59,7 @@ class UserAnswer(models.Model):
     their_points = models.IntegerField(default=-1)
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.my_answer.text[:10]
 
 

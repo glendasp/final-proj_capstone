@@ -7,7 +7,6 @@ from .models import Question, Answer, UserAnswer
 
 
 # Create your views here.
-
 def quiz(request, id):
     if request.user.is_authenticated():
 

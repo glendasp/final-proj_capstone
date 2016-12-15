@@ -34,9 +34,9 @@ def home(request):
         # print(SignUp.objects.all())
         # i = 1
         # for instance in SignUp.objects.all():
-        # 	print(i)
-        # 	print(instance.full_name)
-        # 	i += 1
+        #     print(i)
+        #     print(instance.full_name)
+        #     i += 1
 
         queryset = SignUp.objects.all().order_by('-timestamp')
         context = {
@@ -55,25 +55,25 @@ def contact(request):
         # 	print key, value
         # 	#print form.cleaned_data.get(key)
         form_email = form.cleaned_data.get("email")
-        form_message = form.cleaned_data.get("message")
         form_full_name = form.cleaned_data.get("full_name")
-        print(form_email, form_message, form_full_name)
+        form_message = form.cleaned_data.get("message")
+        print(form_email, form_full_name, form_message)
 
-        # # setting up email part ----- todo --> note to myself: finish this on second phase of the project
-        # subject = 'Site contact form'
-        # from_email = settings.EMAIL_HOST_USER
-        # to_email = [from_email, 'glendasp@gmail.com']
-        # contact_message = "%s: %s via %s" % (
-        #     form_full_name,
-        #     form_message,
-        #     form_email)
-        # some_html_message = """<h1>hello world</h1>"""
-        # send_mail(subject,
-        #           contact_message,
-        #           from_email,
-        #           to_email,
-        #           html_message=some_html_message,
-        #           fail_silently=True)
+        # setting up email part ----- todo --> note to myself: finish this on second phase of the project
+        subject = 'Site contact form'
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [from_email, 'glendasp@gmail.com']
+        contact_message = "%s: %s via %s" % (
+            form_full_name,
+            form_message,
+            form_email)
+        some_html_message = """<h1>hello world</h1>"""
+        send_mail(subject,
+                  contact_message,
+                  from_email,
+                  to_email,
+                  html_message=some_html_message,
+                  fail_silently=True)
     context = {
         "form": form,
         "title": title,
@@ -81,6 +81,9 @@ def contact(request):
     }
     return render(request, "forms.html", context)
 
+
+
+# todo ---- > New versrion including quetion app
 # from django.shortcuts import render
 #
 # from django.core.mail import send_mail

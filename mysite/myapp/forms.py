@@ -1,12 +1,12 @@
 __author__ = 'Glenda Pinho'
 from django import forms
-from .models import SignUp
+from .models import SignUp, ContactForm
 
 
 class ContactForm(forms.Form):
     full_name = forms.CharField(required=False)
-    email = forms.EmailField()
-    message = forms.CharField()
+    email = forms.EmailField(required=False)
+    message = forms.CharField(required=False)
 
 
 class SignUpForm(forms.ModelForm):
