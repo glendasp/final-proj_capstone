@@ -1,6 +1,6 @@
 {% extends "registration/registration_base.html" %}
 {% load i18n %}
-
+{% csrf_token %}
 {% block title %}{% trans "Account Activation Resent" %}{% endblock %}
 
 {% block content %}
