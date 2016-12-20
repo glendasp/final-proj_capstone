@@ -50,6 +50,7 @@
 
 	{% if queryset %}
 	<h2>Welcome Staff</h2>
+	<h3>User name: {{ user }}</h3>
 	<table class='table'>
 	{% for instance in queryset %}
 		<tr><td>{{ forloop.counter }}</td><td>{{ instance.email }}</td><td>{{ instance.full_name }}</td><td>{{ instance.date_created|timesince }} ago</td></tr>
@@ -58,21 +59,15 @@
 		{% endif %}
 	{% endfor %}
 	</table>
+	{% else %}
 
-	{% endif %}
-<hr>
-<h1>BE WELCOM!!</h1>
-
-<h2>What is new...</h2>
-
-
-<div class='col-sm-3'>
-<p class='lead text-align-center'> </b> <strong> New roommates </strong><br/>
-	<i class='fa fa-comment-o fa-stack-5x'></i>
-	<img src="../static/my_static/img/living-with-roommates.jpg" height="872" width="1360"/></span>
+	<h2> Welcome {{ user }}</h2>
 
 </p>
 </div>
+	{% endif %}
+<hr>
+
 
  {% else %}
 <div class="row">
